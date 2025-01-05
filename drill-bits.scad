@@ -45,6 +45,13 @@ text_size = 5;
 // text relief height (mm), 0 to disable.
 text_relief_height = 1.0;
 
+/*
+// Set of 7 hex drill bits
+bit_diameters = [7.25,7.25,7.25,7.25,7.25,7.25,7.25];
+bit_lengths = [80,93,98,105,113,113,120];
+bit_labels = ["3", "4", "4.5", "5", "5.5", "6", "6.5"];
+*/
+
 /* [Bits] */
 bit_diameters = [4,5,6,8,10];
 bit_lengths = [70,85,100,120,150];
