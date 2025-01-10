@@ -1,4 +1,4 @@
-include <../gridfinity-rebuilt-openscad/gridfinity-rebuilt-utility.scad>
+include <../gridfinity-rebuilt-openscad/src/core/gridfinity-rebuilt-utility.scad>
 
 // ===== INFORMATION ===== //
 /*
@@ -66,7 +66,7 @@ minimum_height = 1;
 style_lip = 1; //[0: Regular lip, 1:remove lip subtractively, 2: remove lip and retain height]
 style_hole = 4; // [0:no holes, 1:magnet holes only, 2: magnet and screw holes - no printable slit, 3: magnet and screw holes - printable slit, 4: Gridfinity Refined hole - no glue needed]
 // only cut magnet/screw holes at the corners of the bin to save uneccesary print time
-only_corners = false;
+only_corners = true;
 
 // ===== IMPLEMENTATION ===== //
 module __Customizer_Limit__ () {}  // Hide following assignments from Customizer.
@@ -83,7 +83,7 @@ required_width = num_bits * (gap + minimum_spacing) + bit_widths_total + minimum
 required_length = max(bit_lengths) + thumb_slot_width - thumb_slot_overlap + 2 * minimum_spacing;
 
 thumb_slot_depth = max(bit_diameters) * embed_depth + gap + thumb_slot_step;
-required_height = thumb_slot_depth + h_base;
+required_height = thumb_slot_depth + BASE_HEIGHT;
 
 gridx = ceil(required_width/42);
 gridy = ceil(required_length/42);
@@ -117,7 +117,7 @@ gridfinityInit(gridx, gridy, height(gridz, 0, style_lip), 0, sl=style_lip) {
         }
     }
 }
-gridfinityBase(gridx, gridy, l_grid, 1, 1, style_hole, only_corners=only_corners);
+gridfinityBase([gridx, gridy], hole_options=bundle_hole_options(refined_hole=true), only_corners=only_corners);
 
 // labels
 if (text_relief_height > 0) {
